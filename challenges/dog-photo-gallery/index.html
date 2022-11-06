@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Dog Images</title>
+
+  <style>
+    * {
+      padding: 0px;
+      margin: 0px;
+    }
+
+    div {
+      background-color: red;
+      width: 30%;
+      margin: 0 auto;
+      margin-top: 50px;
+      margin-bottom: 50px;
+      padding: 30px;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    button {
+      font-size: 20px;
+      background-color: black;
+      border-radius: 10px;
+      color: white;
+      padding: 20px;
+      display: block;
+      margin: 0 auto;
+      border: none;
+    }
+
+    button:hover {
+      cursor: pointer;
+    }
+
+    img {
+      display: block;
+      margin: 0 auto;
+      margin-top: 20px;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <button id="btn">Get Random Image</button>
+    <ul id="list"></ul>
+  </div>
+
+  <script>
+    const ul = document.querySelector("#list");
+
+    document.querySelector("#btn").addEventListener("click", async () => {
+      try {
+        const res = await fetch("https://dog.ceo/api/breeds/image/random");
+        const data = await res.json();
+
+        if (data.status !== "success") {
+          console.log(data.message);
+        } else {
+          const li = document.createElement("li");
+          const img = document.createElement("img");
+          img.setAttribute("src", data.message);
+
+          li.appendChild(img);
+          ul.appendChild(li);
+        }
+      } catch (e) {
+        console.log(e.message);
+      }
+    });
+  </script>
+</body>
+
+</html>

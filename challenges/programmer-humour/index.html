@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programmer Humour</title>
+
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <img>
+
+  <script>
+    const img = document.querySelector("img");
+
+    window.onload = async () => {
+      const res = await fetch("https://xkcd.vercel.app/?comic=latest");
+      const data = await res.json();
+
+      img.setAttribute("src", data.img);
+    }
+  </script>
+</body>
+
+</html>
